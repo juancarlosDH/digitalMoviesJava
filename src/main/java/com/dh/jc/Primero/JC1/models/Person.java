@@ -1,4 +1,4 @@
-package com.dh.jc.Primero.JC1.model;
+package com.dh.jc.Primero.JC1.models;
 
 /**
  * POJO
