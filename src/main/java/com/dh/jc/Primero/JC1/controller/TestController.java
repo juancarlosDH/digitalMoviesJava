@@ -1,4 +1,4 @@
-package com.dh.jc.Primero.JC1.controllers;
+package com.dh.jc.Primero.JC1.controller;
 
 import java.util.Date;
 
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dh.jc.Primero.JC1.models.Person;
+import com.dh.jc.Primero.JC1.model.Person;
 
 @RestController
 public class TestController {

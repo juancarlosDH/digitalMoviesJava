@@ -241,6 +241,10 @@ img.like{
     background: transparent;
 }
 
+.card-group {
+	justify-content: space-between;
+}
+
 .card-header{
     z-index: 2;
     display: flex;
