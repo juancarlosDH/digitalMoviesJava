@@ -43,8 +43,8 @@ public class MovieController
 	@PostMapping("")
 	public String create(@Valid Movie movie, BindingResult bindingResult, Model model)
 	{
-		model.addAttribute("data", bindingResult.getAllErrors());
 		if (bindingResult.hasErrors()) {
+			model.addAttribute("genres", this.genreService.findAll());
 			return "movies/new";
 		}
 		Movie newMovie = this.movieService.save(movie);
@@ -61,15 +61,13 @@ public class MovieController
 	}
 
 	@PostMapping(value="/{id}/edit")
-	public String update(@PathVariable(value = "id") Integer id, @Valid Movie movieEdit, BindingResult bindingResult, Model model)
+	public String update(@Valid Movie movieEdit, BindingResult bindingResult, Model model)
 	{
-		model.addAttribute("data", bindingResult.getAllErrors());
 		if (bindingResult.hasErrors()) {
-			Optional<Movie> movie = movieService.findById(id);
 			model.addAttribute("genres", this.genreService.findAll());
 			return "movies/form";
 		}
-		Movie newMovie = this.movieService.save(movieEdit);
+		this.movieService.save(movieEdit);
 		return "redirect:/movies";
 	}
 
