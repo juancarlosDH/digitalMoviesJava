@@ -1,4 +1,4 @@
-package repository;
+package com.dh.jc.Primero.JC1.repository;
 
 import com.dh.jc.Primero.JC1.model.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;

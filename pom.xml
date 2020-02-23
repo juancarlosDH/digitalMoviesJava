@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.3.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from com.dh.jc.Primero.JC1.repository -->
 	</parent>
 	<groupId>com.dh.jc</groupId>
 	<artifactId>Primero-JC-1</artifactId>

@@ -2,13 +2,15 @@ package com.dh.jc.Primero.JC1.controller.rest;
 
 import com.dh.jc.Primero.JC1.model.Movie;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import repository.MovieJPARepository;
+import com.dh.jc.Primero.JC1.repository.MovieJPARepository;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1/movies")
 public class MovieRestController
 {
 
@@ -19,7 +21,7 @@ public class MovieRestController
         this.movieJPARepository = movieJPARepository;
     }
 
-    @GetMapping("/api/v1/movies")
+    @GetMapping("")
     public List<Movie> list ()
     {
         return this.movieJPARepository.findAll();

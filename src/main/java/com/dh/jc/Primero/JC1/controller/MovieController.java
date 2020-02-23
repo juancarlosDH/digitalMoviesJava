@@ -1,6 +1,5 @@
 package com.dh.jc.Primero.JC1.controller;
 
-import com.dh.jc.Primero.JC1.validators.MovieForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -8,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.dh.jc.Primero.JC1.model.Movie;
 
-import repository.GenreJPARepository;
-import repository.MovieJPARepository;
+import com.dh.jc.Primero.JC1.services.MovieService;
+import com.dh.jc.Primero.JC1.services.GenreService;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -18,26 +17,26 @@ import java.util.Optional;
 @RequestMapping("/movies")
 public class MovieController
 {
-	private MovieJPARepository movieJpaRepository;
-	private GenreJPARepository genreJPARepository;
+	private MovieService movieService;
+	private GenreService genreService;
 
-	public MovieController(MovieJPARepository movieJpaRepository, GenreJPARepository genreJPARepository)
+	public MovieController(MovieService movieService, GenreService genreService)
 	{
-		this.movieJpaRepository = movieJpaRepository;
-		this.genreJPARepository = genreJPARepository;
+		this.movieService = movieService;
+		this.genreService = genreService;
 	}
 
 	@GetMapping("")
 	public String index(Model model) 
 	{
-		model.addAttribute("movies", this.movieJpaRepository.findAll());
+		model.addAttribute("movies", this.movieService.findAll());
 		return "movies/index";
 	}
 
 	@GetMapping("/new")
 	public String newMovie(Movie movie, Model model)
 	{
-		model.addAttribute("genres", this.genreJPARepository.findAll());
+		model.addAttribute("genres", this.genreService.findAll());
 		return "movies/new";
 	}
 
@@ -48,15 +47,15 @@ public class MovieController
 		if (bindingResult.hasErrors()) {
 			return "movies/new";
 		}
-		Movie newMovie = this.movieJpaRepository.save(movie);
+		Movie newMovie = this.movieService.save(movie);
 		return "redirect:/movies";
 	}
 
 	@GetMapping(value = "/{id}/edit")
 	public String edit(@PathVariable(value = "id") Integer id, Model model)
 	{
-		model.addAttribute("genres", this.genreJPARepository.findAll());
-		Optional<Movie> movie = movieJpaRepository.findById(id);
+		model.addAttribute("genres", this.genreService.findAll());
+		Optional<Movie> movie = this.movieService.findById(id);
 		model.addAttribute("movie", movie.get());
 		return "movies/form";
 	}
@@ -66,11 +65,11 @@ public class MovieController
 	{
 		model.addAttribute("data", bindingResult.getAllErrors());
 		if (bindingResult.hasErrors()) {
-			Optional<Movie> movie = movieJpaRepository.findById(id);
-			model.addAttribute("genres", this.genreJPARepository.findAll());
+			Optional<Movie> movie = movieService.findById(id);
+			model.addAttribute("genres", this.genreService.findAll());
 			return "movies/form";
 		}
-		Movie newMovie = this.movieJpaRepository.save(movieEdit);
+		Movie newMovie = this.movieService.save(movieEdit);
 		return "redirect:/movies";
 	}
 
